@@ -4,7 +4,7 @@ final int GAME_LOSE = 2;
 final float TOTAL_HP = 193;
 
 float enemyX,enemyY,fighterX,fighterY,treasureX,treasureY;
-float HPWidth,bgSpeed,fighterSpeed;
+float HPWidth,bgSpeed,fighterSpeed,n;
 
 int gameState;
 
@@ -39,8 +39,9 @@ void setup(){
 }
 
 void draw(){
-   if (upPressed) {
+  if (upPressed) {
     fighterY -= fighterSpeed;
+    
   }
   if (downPressed) {
     fighterY += fighterSpeed;
@@ -91,16 +92,28 @@ void draw(){
       stroke(#FF0000);
       rect(22,14,HPWidth,15,3);
       image(hp,10,10);
-      enemyX+=5;
-      enemyX%=640;      
       bgSpeed++;
       bgSpeed%=1280;
+      enemyX+=3;
+      enemyY=fighterY-n;
+      n++;
       
+      if(n>=fighterY){
+        n=fighterY;
+      }
+      
+      if(enemyX>=640){
+      enemyX=0;
+      enemyY=floor(random(30,410));
+      n=0;
+      }
+  
       if(fighterX+50>enemyX && fighterX<enemyX+60){
         if(fighterY+50>enemyY && fighterY<enemyY+60){
             HPWidth-=TOTAL_HP/5;
             enemyX=0;
             enemyY=floor(random(30,410));
+            n=0;
         }
       }
       

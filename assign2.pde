@@ -28,7 +28,7 @@ void setup(){
   end1=loadImage("img/end1.png");
   end2=loadImage("img/end2.png");
   
-  fighterSpeed=5;
+  fighterSpeed=6;
   HPWidth=TOTAL_HP/5;
   fighterX=570;
   fighterY=240;
@@ -95,8 +95,12 @@ void draw(){
       bgSpeed++;
       bgSpeed%=1280;
       enemyX+=3;
-      enemyY=fighterY-n;
-      n++;
+      if(enemyY>fighterY){
+        enemyY-=2;
+      }
+     if(enemyY<=fighterY){
+        enemyY+=2;
+      }
       
       if(n>=fighterY){
         n=fighterY;
